@@ -1,0 +1,47 @@
+.btn{
+    --modeSrc: var(--mode);
+    border: 1px solid rgba(
+            calc(255 * (1 - var(--modeSrc))),
+            calc(255 * (1 - var(--modeSrc))),
+            calc(255 * (1 - var(--modeSrc))),
+            calc(0.10 + 0.20 * var(--modeSrc))
+    );
+
+    background: rgba(255,255,255,.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #e7e9ee;
+    border-radius: 16px;
+    padding: 10px 14px;
+    line-height: 1;
+    user-select: none;
+    cursor: pointer;
+
+    transition: background .12s ease, border-color .12s ease;
+}
+
+body.theme-transition .btn{
+    --modeSrc: var(--nmode);
+}
+
+.btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); }
+
+.btn:focus-visible{
+    outline: 2px solid rgba(236,72,153,.55);
+    outline-offset: 3px;
+}
+
+.btn--ghost{
+    background: transparent;
+    border-color: rgba(255,255,255,.10);
+}
+
+.btn--icon{
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    font-size: 22px;
+}

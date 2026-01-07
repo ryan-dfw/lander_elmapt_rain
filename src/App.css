@@ -1,0 +1,189 @@
+:root{
+    --bg-base: #0b0d12;
+    --text: #e7e9ee;
+    --label-gap: 12px;
+    --c1: 124 58 237; --c1a: 0.22;
+    --c2: 236 72 153; --c2a: 0.16;
+    --c3: 245 158 11; --c3a: 0.10;
+    --p1x: 86%; --p1y: 18%;
+    --p2x: 14%; --p2y: 82%;
+    --p3x: 78%; --p3y: 58%;
+}
+
+#root {
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-color: var(--bg-base);
+    opacity: 1;
+    transition: none;
+
+    background-image:
+            radial-gradient(
+                    900px 700px at var(--p1x) var(--p1y),
+                    rgba(var(--c3) / var(--c3a)) 0%,
+                    rgba(var(--c3) / 0) 60%
+            ),
+            radial-gradient(
+                    1200px 900px at var(--p2x) var(--p2y),
+                    rgba(var(--c1) / var(--c1a)) 0%,
+                    rgba(var(--c1) / 0) 62%
+            ),
+            radial-gradient(
+                    1000px 800px at var(--p3x) var(--p3y),
+                    rgba(var(--c2) / var(--c2a)) 0%,
+                    rgba(var(--c2) / 0) 58%
+            );
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body{
+    background: transparent;
+    color: var(--text);
+    touch-action: none;
+    transition: color 1000ms ease;
+}
+
+.stage{
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+
+    display: grid;
+    place-items: center;
+
+    padding:
+            calc(12px + env(safe-area-inset-top))
+            calc(12px + env(safe-area-inset-right))
+            calc(12px + env(safe-area-inset-bottom))
+            calc(12px + env(safe-area-inset-left));
+}
+
+@supports (height: 100dvh){
+    .stage{ height: 100dvh; }
+}
+@supports not (height: 100dvh){
+    .stage{ height: 100svh; }
+}
+
+.poster{
+    position: relative;
+    display: inline-block;
+    max-width: min(80vw, 1200px);
+    max-height: 90vh;
+    font-size: clamp(14px, 1.6vw, 18px);
+}
+
+.poster > img{
+    display: block;
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 5px;
+    -webkit-mask-image: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,1) 12%,
+            rgba(0,0,0,1) 88%,
+            rgba(0,0,0,0) 100%
+    );
+    mask-image: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,1) 12%,
+            rgba(0,0,0,1) 88%,
+            rgba(0,0,0,0) 100%
+    );
+}
+
+.label{
+    position: absolute;
+    color: var(--text);
+    line-height: 1.15;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: 0.02em;
+}
+
+.label-name{
+    right: 0;
+    top: calc(-.5 * var(--label-gap));
+    transform: translateY(-100%);
+    text-align: right;
+
+    font-family: "Libre Caslon Text", Caslon, serif;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    font-size: 2em;
+    opacity: 0.95;
+}
+
+.label-date{
+    left: 0;
+    top: calc(100% + 0.5 * (var(--label-gap)));
+    text-align: left;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.60;
+}
+
+.label-handle{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1em;
+    letter-spacing: 0.08em;
+    right: 0;
+    top: calc(100% + 0.35 * (var(--label-gap)));
+    opacity: 1;
+}
+
+.navBtn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    pointer-events: auto;
+    user-select: none;
+}
+
+.navPrev{
+    left: calc(10px + env(safe-area-inset-left));
+}
+
+.navNext{
+    right: calc(10px + env(safe-area-inset-right));
+}
+
+.navEdge{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+}
+
+.navLeft{ left: calc(14px + env(safe-area-inset-left)); }
+.navRight{ right: calc(14px + env(safe-area-inset-right)); }
