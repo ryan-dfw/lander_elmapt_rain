@@ -157,38 +157,40 @@ export default function App() {
         <>
             <div className="bg" />
             <div className="stage">
-                <div className="poster">
-                    <img
-                        src={pfp.image}
-                        alt={pfp.name}
-                        loading="eager"
-                        fetchPriority={"high"}
-                        draggable={false}
-                        className={"posterImg"}
-                        />
+                <div className="frame">
+                    <div className="poster">
+                        <img
+                            src={pfp.image}
+                            alt={pfp.name}
+                            loading="eager"
+                            fetchPriority={"high"}
+                            draggable={false}
+                            className={"posterImg"}
+                            />
 
-                    <div className="label label-name">{pfp.name}</div>
-                    <div className="label label-date">{pfp.year}</div>
-                    <div className="label label-handle">{pfp.handle}</div>
-                        <Button
-                            variant="glass"
-                            size="icon"
-                            className="navBtn navPrev"
-                            aria-label="temp"
-                            onClick={() => {}}
-                        >
-                            ⟨
-                        </Button>
+                        <div className="label label-name">{pfp.name}</div>
+                        <div className="label label-date">{pfp.year}</div>
+                        <div className="label label-handle">{pfp.handle}</div>
+                            <Button
+                                variant="glass"
+                                size="icon"
+                                className="navBtn navPrev"
+                                aria-label="temp"
+                                onClick={() => {}}
+                            >
+                                ⟨
+                            </Button>
 
-                        <Button
-                            variant="glass"
-                            size="icon"
-                            className="navBtn navNext"
-                            aria-label="temp"
-                            onClick={() => {}}
-                        >
-                            ⟩
-                        </Button>
+                            <Button
+                                variant="glass"
+                                size="icon"
+                                className="navBtn navNext"
+                                aria-label="temp"
+                                onClick={() => {}}
+                            >
+                                ⟩
+                            </Button>
+                    </div>
                 </div>
             </div>
         </>
