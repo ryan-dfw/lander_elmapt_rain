@@ -1,6 +1,6 @@
 :root{
     --bg-base: #0b0d12;
-    --text: #e7e9ee;
+    --text: #f2f3f6;
     --label-gap: 12px;
     --c1: 124 58 237; --c1a: 0.22;
     --c2: 236 72 153; --c2a: 0.16;
@@ -63,7 +63,8 @@ body{
     overflow: hidden;
 
     display: grid;
-    place-items: start center;
+    justify-items: center;
+    align-content: start;
 
     padding:
             calc(18px + env(safe-area-inset-top))
@@ -91,7 +92,6 @@ body{
 .poster{
     position: relative;
     width: min(92vw, 520px);
-    margin-top: calc(10px + env(safe-area-inset-top));
     font-size: clamp(14px, 1.6vw, 18px);
 }
 
@@ -120,53 +120,92 @@ body{
     );
 }
 
-.label{
-    position: absolute;
-    color: var(--text);
-    line-height: 1.15;
-    white-space: nowrap;
-    user-select: none;
+.wordmark{
+    margin-top: 18px;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
     pointer-events: none;
-    letter-spacing: 0.02em;
-    display: none;
+    user-select: none;
+    transform: scale(1.1);
+    transform-origin: top center;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
 }
 
-.label-name{
-    right: 0;
-    top: calc(-.5 * var(--label-gap));
-    transform: translateY(-100%);
-    text-align: right;
+.wmTop{
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    opacity: 0.9;
+}
 
-    font-family: "Libre Caslon Text", Caslon, serif;
+.wmName{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.75em;
+    line-height: 1;
+}
+
+.wmDot{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
     font-weight: 400;
-    font-style: italic;
-    letter-spacing: 0.02em;
-    font-size: 2em;
-    opacity: 0.95;
-}
-
-.label-date{
-    left: 0;
-    top: calc(100% + 0.5 * (var(--label-gap)));
-    text-align: left;
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 1em;
-    letter-spacing: 0.04em;
+    font-size: 13px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    opacity: 0.60;
+    opacity: 0.65;
+    transform: translateY(-1px);
 }
 
-.label-handle{
+.wmRole{
     font-family: "IBM Plex Sans", system-ui, sans-serif;
-    font-weight: 300;
     font-style: italic;
-    font-size: 1em;
-    letter-spacing: 0.08em;
-    right: 0;
-    top: calc(100% + 0.35 * (var(--label-gap)));
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.80;
+    display: inline-block;
+    transform: translateY(-1px) scaleY(1.15);
+}
+
+.wmStudio{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
     opacity: 1;
+}
+
+.label-contact{
+    margin-top: 3em;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 1em;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    opacity: 1;
+    text-align: center;
+    pointer-events: auto;
+}
+
+.contact {
+    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+}
+
+.contact-prefix{
+    display: inline-block;
+    transform: translateY(-1px) scale(0.85);
+    transform-origin: right bottom;
+    opacity: 0.9;
+}
+
+.contact-sep{
+    display: inline-block;
+    opacity: 0.75;
+    transform: scale(1.15);
+    transform-origin: center;
+    padding: 0 0.35em;
 }
 
 .navBtn{

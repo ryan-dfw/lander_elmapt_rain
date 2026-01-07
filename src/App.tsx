@@ -20,16 +20,16 @@ export type Pfp = {
 };
 
 const pfp: Pfp = {
-    name: "Lorem",
+    name: "Rain",
     year: "xxxx",
     handle: "ipsum",
     image: Rain,
     theme: {
-        base: "#0b0d12",
-        c1: "#6d28d9", c1a: 0.22,
-        c2: "#ec4899", c2a: 0.16,
-        c3: "#f59e0b", c3a: 0.10,
-        text: "#e7e9ee",
+        base: "#06080d",
+        c1: "#1b2433", c1a: 0.55,
+        c2: "#243a5e", c2a: 0.30,
+        c3: "#0a0f18", c3a: 0.85,
+        text: "#d9dce3",
     },
 };
 
@@ -168,28 +168,40 @@ export default function App() {
                             className={"posterImg"}
                             />
 
-                        <div className="label label-name">{pfp.name}</div>
-                        <div className="label label-date">{pfp.year}</div>
-                        <div className="label label-handle">{pfp.handle}</div>
-                            <Button
-                                variant="glass"
-                                size="icon"
-                                className="navBtn navPrev"
-                                aria-label="temp"
-                                onClick={() => {}}
-                            >
-                                ⟨
-                            </Button>
+                        <div className="wordmark" aria-label={`${pfp.name} — Lead Photographer — Elm Aperture`}>
+                            <div className="wmTop">
+                                <span className="wmName">{pfp.name}</span>
+                                <span className="wmDot">•</span>
+                                <span className="wmRole">Lead Photographer</span>
+                            </div>
+                            <div className="wmStudio">ELM&nbsp;APERTURE</div>
+                        </div>
 
-                            <Button
-                                variant="glass"
-                                size="icon"
-                                className="navBtn navNext"
-                                aria-label="temp"
-                                onClick={() => {}}
-                            >
-                                ⟩
-                            </Button>
+                        <div className="label label-contact">
+                            <span className="contact-prefix">ph</span> 972.800.6775
+                            <span className="contact-sep"> · </span>
+                            <span className="contact-prefix">em</span> rain@elmapt.com
+                        </div>
+
+                        <Button
+                            variant="glass"
+                            size="icon"
+                            className="navBtn navPrev"
+                            aria-label="temp"
+                            onClick={() => {}}
+                        >
+                            ⟨
+                        </Button>
+
+                        <Button
+                            variant="glass"
+                            size="icon"
+                            className="navBtn navNext"
+                            aria-label="temp"
+                            onClick={() => {}}
+                        >
+                            ⟩
+                        </Button>
                     </div>
                 </div>
             </div>
