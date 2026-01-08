@@ -160,6 +160,18 @@ function blastOffPaint() {
     }, 1000);
 }
 
+const serveVcard = () => {
+    const a = document.createElement("a");
+    a.href = "/Rain.vcf";           // absolute from site root
+    a.download = "Rain.vcf";        // hint: save vs. preview
+    a.target = "_self";             // iOS Safari quirk
+    a.rel = "noopener";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+};
+
 export default function App() {
 
     const IMAGE_STEP = 0.94;
@@ -611,7 +623,7 @@ export default function App() {
                             variant="glass"
                             className="utilityBtn"
                             aria-label="Download"
-                            onClick={() => {}}
+                            onClick={() => {console.log("You've got mail!"); serveVcard()}}
                         >
                             ⤓
                         </Button>
