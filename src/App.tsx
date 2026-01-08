@@ -56,6 +56,110 @@ function setTheme(t: Theme) {
     r.style.setProperty("--text", t.text);
 }
 
+function PaintText({ text, group, className = "" }: { text: string; group: "name" | "role" | "studio"; className?: string }) {
+    const lastElRef = useRef<HTMLElement | null>(null);
+
+    const paintAt = (x: number, y: number) => {
+        const el = document.elementFromPoint(x, y) as HTMLElement | null;
+        if (!el?.classList.contains("glyph")) return;
+
+        // always “activate” instantly
+        el.classList.add("glyph--on");
+        el.style.setProperty("--s", "100");
+
+        if (lastElRef.current !== el) {
+            const s = Number(el.style.getPropertyValue("--s")) || 0;
+            const h = Number(el.style.getPropertyValue("--h")) || 0;
+
+            if (s > 0) el.style.setProperty("--h", String((h + 40) % 360));
+            lastElRef.current = el;
+        }
+    };
+
+    const onDown = (e: React.PointerEvent<HTMLSpanElement>) => {
+        (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+        paintAt(e.clientX, e.clientY);
+    };
+
+    const onMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+        // only paint while pressed (prevents hover-paint on desktop)
+        if ((e.buttons & 1) === 0) return;
+        paintAt(e.clientX, e.clientY);
+    };
+
+    const onUp = () => { lastElRef.current = null; };
+
+    return (
+        <span
+            className={["paint", className].join(" ")}
+            data-group={group}
+            onPointerDown={onDown}
+            onPointerMove={onMove}
+            onPointerUp={onUp}
+        >
+      {Array.from(text).map((ch, i) => (
+          <span key={i} className="glyph">
+          {ch === " " ? "\u00A0" : ch}
+        </span>
+      ))}
+    </span>
+    );
+}
+
+function circularMeanHue(hues: number[]) {
+    if (!hues.length) return 210;
+    let sx = 0, sy = 0;
+    for (const h of hues) {
+        const a = (h * Math.PI) / 180;
+        sx += Math.cos(a);
+        sy += Math.sin(a);
+    }
+    const ang = Math.atan2(sy, sx);
+    return ((ang * 180) / Math.PI + 360) % 360;
+}
+
+function sampleGroupHue(group: "name" | "role" | "studio") {
+    const els = document.querySelectorAll<HTMLElement>(
+        `.paint[data-group="${group}"] .glyph--on`
+    );
+    const hues: number[] = [];
+    els.forEach(el => {
+        const h = Number(el.style.getPropertyValue("--h"));
+        if (Number.isFinite(h)) hues.push(((h % 360) + 360) % 360);
+    });
+    return circularMeanHue(hues);
+}
+
+function blastOffPaint() {
+    const h1 = sampleGroupHue("name");
+    const h2 = sampleGroupHue("role");
+    const h3 = sampleGroupHue("studio");
+
+    const root = document.documentElement;
+
+    // buttons: set hues (CSS should have transitions on whatever uses these vars)
+    root.style.setProperty("--btnHue1", String(h1));
+    root.style.setProperty("--btnHue2", String(h2));
+    root.style.setProperty("--btnHue3", String(h3));
+
+    // glyphs: fade out first, then clean up
+    const glyphs = Array.from(document.querySelectorAll<HTMLElement>(".wordmark .glyph--on"));
+
+    // trigger the fade by forcing saturation to 0 (your CSS should use --s)
+    glyphs.forEach(el => {
+        el.style.setProperty("--s", "0");
+        el.classList.remove("glyph--on"); // ok to remove now if base color uses var(--text)
+    });
+
+    // after fade completes, fully reset inline vars
+    window.setTimeout(() => {
+        glyphs.forEach(el => {
+            el.style.removeProperty("--h");
+            el.style.removeProperty("--s");
+        });
+    }, 1000);
+}
+
 export default function App() {
 
     const IMAGE_STEP = 0.94;
@@ -159,6 +263,7 @@ export default function App() {
         // TURBO: amplify if it was a real flick
         if (Math.abs(dragRef.current.vel) > TURBO_THRESH) {
             vDeg *= 10;
+            blastOffPaint();
         }
 
         dragRef.current.vDeg = vDeg;
@@ -347,6 +452,31 @@ export default function App() {
         };
     }, []);
 
+    useEffect(() => {
+        let raf = 0;
+
+        const tick = () => {
+            document.querySelectorAll<HTMLElement>(".wordmark .glyph--on").forEach(el => {
+                const h = Number(el.style.getPropertyValue("--h")) || 0;
+
+                // decay hue toward 0; exact target doesn't matter since we remove the class at the end
+                const next = h * .99999;
+
+                if (Math.abs(next) < 1) {
+                    el.style.removeProperty("--h");
+                    el.classList.remove("glyph--on"); // snap back to white
+                } else {
+                    el.style.setProperty("--h", String(next));
+                }
+            });
+
+            raf = requestAnimationFrame(tick);
+        };
+
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+    }, []);
+
     return (
         <>
             <div className="bg" />
@@ -397,11 +527,17 @@ export default function App() {
                         <div className="infoBlock">
                             <div className="wordmark" aria-label={`${pfp.name} — Lead Photographer — Elm Aperture`}>
                                 <div className="wmTop">
-                                    <span className="wmName">{pfp.name}</span>
+                                    <span className="wmName">
+                                      <PaintText group="name" text={pfp.name} />
+                                    </span>
                                     <span className="wmDot">•</span>
-                                    <span className="wmRole">Lead Photographer</span>
+                                    <span className="wmRole">
+                                      <PaintText group="role" text="Lead Photographer" />
+                                    </span>
                                 </div>
-                                <div className="wmStudio">ELM&nbsp;APERTURE</div>
+                                <div className="wmStudio">
+                                    <PaintText group="studio" text="ELM APERTURE" />
+                                </div>
                             </div>
 
                             <div className="label label-contact">

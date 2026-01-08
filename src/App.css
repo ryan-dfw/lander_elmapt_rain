@@ -8,6 +8,9 @@
     --p1x: 86%; --p1y: 18%;
     --p2x: 14%; --p2y: 82%;
     --p3x: 78%; --p3y: 58%;
+    --btnHue1: 210;
+    --btnHue2: 210;
+    --btnHue3: 210;
 }
 
 #root {
@@ -346,7 +349,6 @@ body{
     display: grid;
     justify-items: center;
     gap: 6px;
-    pointer-events: none;
     user-select: none;
     transform: scale(1.2);
     transform-origin: top center;
@@ -487,4 +489,30 @@ a {
     text-transform: uppercase;
     letter-spacing: 0.3em;
     font-weight: 300;
+}
+
+.paint { touch-action: none; }
+
+.wordmark .glyph{
+    display: inline-block;
+    color: var(--text);
+    --h: 0;   /* 0 = red */
+    --s: 0;   /* 0..100 (we’ll treat 100 as “255”) */
+    transition: color 60ms linear;
+}
+
+.wordmark .glyph--on{
+    color: hsl(var(--h) calc(var(--s) * 1%) 70%);
+}
+
+.wordmark .glyph--fade { transition: opacity 180ms linear; opacity: 0; }
+
+.buttonBlock > .ctaBtn:nth-child(1){ --btnHue: var(--btnHue1); }
+.buttonBlock > .ctaBtn:nth-child(2){ --btnHue: var(--btnHue2); }
+.buttonBlock > .ctaBtn:nth-child(3){ --btnHue: var(--btnHue3); }
+
+.ctaBtn{
+    border-color: hsla(var(--btnHue) 90% 70% / .22);
+    box-shadow: 0 10px 28px rgba(0,0,0,.35),
+    0 0 0 1px hsla(var(--btnHue) 90% 70% / .10) inset;
 }
