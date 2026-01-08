@@ -295,7 +295,7 @@ body{
     filter:
             blur(2px)
             brightness(0.58)
-            contrast(0.95);
+            contrast(0.95)
             saturate(0.8)
             hue-rotate(-4deg);
     opacity: 0.9;
