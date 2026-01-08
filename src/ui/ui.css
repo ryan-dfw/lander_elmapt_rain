@@ -1,12 +1,5 @@
 .btn{
-    --modeSrc: var(--mode);
-    border: 1px solid rgba(
-            calc(255 * (1 - var(--modeSrc))),
-            calc(255 * (1 - var(--modeSrc))),
-            calc(255 * (1 - var(--modeSrc))),
-            calc(0.10 + 0.20 * var(--modeSrc))
-    );
-
+    border: 1px solid rgba(255,255,255,.1);
     background: rgba(255,255,255,.02);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(5px);
@@ -18,10 +11,6 @@
     cursor: pointer;
 
     transition: background .12s ease, border-color .12s ease;
-}
-
-body.theme-transition .btn{
-    --modeSrc: var(--nmode);
 }
 
 .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); }

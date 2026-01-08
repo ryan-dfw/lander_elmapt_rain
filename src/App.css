@@ -97,12 +97,12 @@ body{
 
 .poster > img{
     display: block;
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     aspect-ratio: 1;
     object-fit: cover;
     object-position: center;
-    border: 1px solid rgba(255,255,255,.30);
+    border: 1px solid rgba(255,255,255,.50);
     border-radius: 5px;
     -webkit-mask-image: linear-gradient(
             to bottom,
@@ -121,13 +121,13 @@ body{
 }
 
 .wordmark{
-    margin-top: 18px;
+    margin-top: 15px;
     display: grid;
     justify-items: center;
     gap: 6px;
     pointer-events: none;
     user-select: none;
-    transform: scale(1.1);
+    transform: scale(1.2);
     transform-origin: top center;
     text-shadow: 0 1px 12px rgba(0,0,0,0.35);
 }
@@ -178,7 +178,7 @@ body{
 }
 
 .label-contact{
-    margin-top: 3em;
+    margin-top: 2.5em;
     font-family: "IBM Plex Sans", system-ui, sans-serif;
     font-variant-numeric: tabular-nums;
     font-size: 1em;
@@ -208,30 +208,44 @@ body{
     padding: 0 0.35em;
 }
 
-.navBtn{
+.buttonBlock{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ctaBtn{
+    align-self: center;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+}
+
+.utilityBtn{
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
-    pointer-events: auto;
-    user-select: none;
-    display: none;
-}
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
 
-.navPrev{
-    left: calc(10px + env(safe-area-inset-left));
-}
+    padding: 16px 18px;
+    width: 56px;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    font-size: 20px;
 
-.navNext{
-    right: calc(10px + env(safe-area-inset-right));
-}
+    display: grid;
+    place-items: center;
 
-.navEdge{
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: 300;
 }
-
-.navLeft{ left: calc(14px + env(safe-area-inset-left)); }
-.navRight{ right: calc(14px + env(safe-area-inset-right)); }

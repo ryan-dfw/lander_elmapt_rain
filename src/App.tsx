@@ -25,11 +25,11 @@ const pfp: Pfp = {
     handle: "ipsum",
     image: Rain,
     theme: {
-        base: "#06080d",
-        c1: "#1b2433", c1a: 0.55,
-        c2: "#243a5e", c2a: 0.30,
-        c3: "#0a0f18", c3a: 0.85,
-        text: "#d9dce3",
+        base: "#070c14",
+        c1: "#1e3a8a", c1a: 0.18,
+        c2: "#0f172a", c2a: 0.22,
+        c3: "#0c0132", c3a: 0.10,
+        text: "#dbe3ee",
     },
 };
 
@@ -168,40 +168,62 @@ export default function App() {
                             className={"posterImg"}
                             />
 
-                        <div className="wordmark" aria-label={`${pfp.name} — Lead Photographer — Elm Aperture`}>
-                            <div className="wmTop">
-                                <span className="wmName">{pfp.name}</span>
-                                <span className="wmDot">•</span>
-                                <span className="wmRole">Lead Photographer</span>
+                        <div className="infoBlock">
+                            <div className="wordmark" aria-label={`${pfp.name} — Lead Photographer — Elm Aperture`}>
+                                <div className="wmTop">
+                                    <span className="wmName">{pfp.name}</span>
+                                    <span className="wmDot">•</span>
+                                    <span className="wmRole">Lead Photographer</span>
+                                </div>
+                                <div className="wmStudio">ELM&nbsp;APERTURE</div>
                             </div>
-                            <div className="wmStudio">ELM&nbsp;APERTURE</div>
+
+                            <div className="label label-contact">
+                                <span className="contact-prefix">ph</span> 972.800.6775
+                                <span className="contact-sep"> · </span>
+                                <span className="contact-prefix">em</span> rain@elmapt.com
+                            </div>
                         </div>
 
-                        <div className="label label-contact">
-                            <span className="contact-prefix">ph</span> 972.800.6775
-                            <span className="contact-sep"> · </span>
-                            <span className="contact-prefix">em</span> rain@elmapt.com
+                        <div className="buttonBlock">
+                            <Button
+                                variant="glass"
+                                className="ctaBtn"
+                                aria-label="Portfolio"
+                                onClick={() => {}}
+                            >
+                                Portfolio
+                            </Button>
+
+                            <Button
+                                variant="glass"
+                                className="ctaBtn"
+                                aria-label="Portfolio"
+                                onClick={() => {}}
+                            >
+                                Instagram
+                            </Button>
+
+                            <Button
+                                variant="glass"
+                                className="ctaBtn"
+                                aria-label="Videography"
+                                onClick={() => {}}
+                            >
+                               Videography
+                            </Button>
+
                         </div>
 
                         <Button
                             variant="glass"
-                            size="icon"
-                            className="navBtn navPrev"
-                            aria-label="temp"
+                            className="utilityBtn"
+                            aria-label="Download"
                             onClick={() => {}}
                         >
-                            ⟨
+                            ⤓
                         </Button>
 
-                        <Button
-                            variant="glass"
-                            size="icon"
-                            className="navBtn navNext"
-                            aria-label="temp"
-                            onClick={() => {}}
-                        >
-                            ⟩
-                        </Button>
                     </div>
                 </div>
             </div>
