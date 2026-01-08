@@ -292,7 +292,7 @@ export default function App() {
                             onPointerCancel={onUp}
                         >
                             <div className={`card3dInner ${dragging ? "dragging" : ""}`}
-                                 style={{ transform: `rotateY(${rotY}deg)` }}>
+                                 style={{transform: `rotateY(${rotY}deg)`}}>
                                 {/* FRONT */}
                                 <div className="cardFace cardFront">
                                     <img
@@ -305,15 +305,18 @@ export default function App() {
                                     />
                                 </div>
 
-                                {/* BACK (temporary black panel) */}
+                                <div className="cardSide sideTop"></div>
+                                <div className="cardSide sideBottom"></div>
+                                <div className="cardSide sideLeft"></div>
+                                <div className="cardSide sideRight"></div>
+
+                                {/* BACK (image seen through acrylic) */}
                                 <div className="cardFace cardBack">
-                                    <div
-                                        style={{
-                                            width: "100%",
-                                            aspectRatio: "1",
-                                            background: "#000",
-                                            borderRadius: "5px",
-                                        }}
+                                    <img
+                                        src={pfp.image}
+                                        alt=""
+                                        draggable={false}
+                                        className="posterImg posterImgBack"
                                     />
                                 </div>
                             </div>
