@@ -80,22 +80,8 @@ body{
     .stage{ height: 100svh; }
 }
 
-.frame{
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    align-items: start;
-    justify-items: center;
-}
-
-.poster{
-    position: relative;
-    width: min(92vw, 520px);
-    font-size: clamp(14px, 1.6vw, 18px);
-}
-
 .card3d{
+    --slabMult: 1;
     --r: 18px;        /* corner radius */
     --t: 18px;        /* thickness (px) */
     --edge: rgba(210,230,255,.14);
@@ -108,12 +94,31 @@ body{
     --inset: 2.5px;
     border-radius: var(--r);
     transform-style: preserve-3d;
-    width: 90%;
+    width: calc(min(86vw, 56dvh, 520px) * var(--slabMult));
+    min-width: 0;
+    transition: width 140ms ease;
     margin: 0 auto;
     aspect-ratio: 1;
     position: relative;
     perspective: 900px;
-    touch-action: pan-y; /* allow vertical page gestures if any; swipe handled by JS */
+}
+
+.frame{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: start;
+    justify-items: center;
+}
+
+.poster{
+    --posterMult: 1;
+    position: relative;
+    width: calc(min(92vw, 520px) * var(--posterMult));
+    min-width: 40vw;
+    font-size: clamp(14px, 1.6vw, 18px);
+    transition: width 140ms ease;
 }
 
 .card3dInner{
@@ -395,6 +400,10 @@ body{
 
 .label-contact{
     margin-top: 2.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35em;
     font-family: "IBM Plex Sans", system-ui, sans-serif;
     font-variant-numeric: tabular-nums;
     font-size: 1em;
@@ -403,6 +412,15 @@ body{
     opacity: 1;
     text-align: center;
     pointer-events: auto;
+}
+
+.contact-phone,
+.contact-email{
+    white-space: nowrap;
+}
+
+.contact-sep{
+    white-space: nowrap;
 }
 
 .contact {

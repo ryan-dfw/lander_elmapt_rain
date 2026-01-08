@@ -27,6 +27,7 @@ const pfp: Pfp = {
     theme: {
         base: "#070c14",
         c1: "#1e3a8a", c1a: 0.18,
+
         c2: "#0f172a", c2a: 0.22,
         c3: "#0c0132", c3a: 0.10,
         text: "#dbe3ee",
@@ -57,6 +58,19 @@ function setTheme(t: Theme) {
 
 export default function App() {
 
+    const IMAGE_STEP = 0.94;
+    const POSTER_STEP = 0.97;
+    const IMAGE_MIN = 0.65;
+    const POSTER_MIN = 0.75;
+
+    const imageScaleRef = useRef(1);
+    const posterScaleRef = useRef(1);
+    const lockedRef = useRef(false);
+
+    const posterRef = useRef<HTMLDivElement | null>(null);
+    const slabRef = useRef<HTMLDivElement | null>(null);
+    const utilityRef = useRef<HTMLButtonElement | null>(null);
+    const buttonsRef = useRef<HTMLDivElement | null>(null);
     const [rotY, setRotY] = useState(0);
     const [dragging, setDragging] = useState(false);
 
@@ -278,21 +292,80 @@ export default function App() {
         return () => cancelAnimationFrame(raf);
     }, []);
 
+    useEffect(() => {
+        const poster = posterRef.current;
+        const slab = slabRef.current;
+        const utility = utilityRef.current;
+        const buttons = buttonsRef.current;
+        if (!poster || !slab || !utility || !buttons) return;
+
+        const isOverlapping = () => {
+            const u = utility.getBoundingClientRect();
+            const b = buttons.getBoundingClientRect();
+            return !(
+                u.right + 8 < b.left ||
+                u.left - 8 > b.right ||
+                u.bottom + 8 < b.top ||
+                u.top - 8 > b.bottom
+            );
+        };
+
+        const tick = () => {
+            if (lockedRef.current) return;
+
+            if (!isOverlapping()) return;
+
+            lockedRef.current = true;
+
+            if (imageScaleRef.current > IMAGE_MIN) {
+                imageScaleRef.current *= IMAGE_STEP;
+                slab.style.setProperty(
+                    "--slabMult",
+                    String(imageScaleRef.current)
+                );
+            }
+            else if (posterScaleRef.current > POSTER_MIN) {
+                posterScaleRef.current *= POSTER_STEP;
+                poster.style.setProperty(
+                    "--posterMult",
+                    String(posterScaleRef.current)
+                );
+            }
+
+            // release lock next frame
+            requestAnimationFrame(() => {
+                lockedRef.current = false;
+            });
+        };
+
+        window.addEventListener("resize", tick);
+        window.addEventListener("orientationchange", tick);
+        document.fonts?.ready?.then(tick);
+
+        return () => {
+            window.removeEventListener("resize", tick);
+            window.removeEventListener("orientationchange", tick);
+        };
+    }, []);
+
     return (
         <>
             <div className="bg" />
             <div className="stage">
                 <div className="frame">
-                    <div className="poster">
+                    <div ref={posterRef} className="poster">
                         <div
+                            ref={slabRef}
                             className="card3d"
                             onPointerDown={onDown}
                             onPointerMove={onMove}
                             onPointerUp={onUp}
                             onPointerCancel={onUp}
                         >
-                            <div className={`card3dInner ${dragging ? "dragging" : ""}`}
-                                 style={{transform: `rotateY(${rotY}deg)`}}>
+                            <div
+                                className={`card3dInner ${dragging ? "dragging" : ""}`}
+                                style={{ transform: `rotateY(${rotY}deg)` }}
+                            >
                                 {/* FRONT */}
                                 <div className="cardFace cardFront">
                                     <img
@@ -333,13 +406,20 @@ export default function App() {
                             </div>
 
                             <div className="label label-contact">
-                                <span className="contact-prefix">ph</span> 972.800.6775
+                                <span className="contact-phone">
+                                    <span className="contact-prefix">ph</span> 972.800.6775
+                                </span>
                                 <span className="contact-sep"> · </span>
-                                <span className="contact-prefix">em</span> rain@elmapt.com
+                                <span className="contact-email">
+                                    <span className="contact-prefix">em</span> rain@elmapt.com
+                                </span>
                             </div>
                         </div>
 
-                        <div className="buttonBlock">
+                        <div
+                            ref={buttonsRef}
+                            className="buttonBlock"
+                        >
                             <Button
                                 variant="glass"
                                 className="ctaBtn"
@@ -370,6 +450,7 @@ export default function App() {
                         </div>
 
                         <Button
+                            ref={utilityRef}
                             variant="glass"
                             className="utilityBtn"
                             aria-label="Download"
