@@ -332,7 +332,6 @@ export default function App() {
                 );
             }
 
-            // release lock next frame
             requestAnimationFrame(() => {
                 lockedRef.current = false;
             });
@@ -406,13 +405,17 @@ export default function App() {
                             </div>
 
                             <div className="label label-contact">
-                                <span className="contact-phone">
-                                    <span className="contact-prefix">ph</span> 972.800.6775
-                                </span>
+                                <span className="contact-prefix">ph</span>{" "}
+                                <a className="contact-link" href="tel:+19728006775">
+                                    972.800.6775
+                                </a>
+
                                 <span className="contact-sep"> · </span>
-                                <span className="contact-email">
-                                    <span className="contact-prefix">em</span> rain@elmapt.com
-                                </span>
+
+                                <span className="contact-prefix">em</span>{" "}
+                                <a className="contact-link" href="mailto:rain@elmapt.com">
+                                    rain@elmapt.com
+                                </a>
                             </div>
                         </div>
 
@@ -421,30 +424,48 @@ export default function App() {
                             className="buttonBlock"
                         >
                             <Button
+                                asChild
                                 variant="glass"
                                 className="ctaBtn"
                                 aria-label="Portfolio"
-                                onClick={() => {}}
                             >
-                                Portfolio
+                                <a
+                                    href="https://elmapt.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Portfolio
+                                </a>
                             </Button>
 
                             <Button
+                                asChild
                                 variant="glass"
                                 className="ctaBtn"
-                                aria-label="Portfolio"
-                                onClick={() => {}}
+                                aria-label="Instagram"
                             >
-                                Instagram
+                                <a
+                                    href="https://instagram.com/raindfwphotos"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Instagram
+                                </a>
                             </Button>
 
                             <Button
+                                asChild
                                 variant="glass"
                                 className="ctaBtn"
                                 aria-label="Videography"
-                                onClick={() => {}}
                             >
-                               Videography
+                                <a
+                                    href="https://vimeo.com/raindfwphotos"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Videography
+                                </a>
                             </Button>
 
                         </div>
