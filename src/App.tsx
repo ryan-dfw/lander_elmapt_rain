@@ -1,5 +1,5 @@
 import './App.css'
-import Rain from "./img/rain.jpg"
+import Rain from "./img/rain.webp"
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import { Button } from "./ui/Button";
 
@@ -27,7 +27,6 @@ const pfp: Pfp = {
     theme: {
         base: "#070c14",
         c1: "#1e3a8a", c1a: 0.18,
-
         c2: "#0f172a", c2a: 0.22,
         c3: "#0c0132", c3a: 0.10,
         text: "#dbe3ee",
