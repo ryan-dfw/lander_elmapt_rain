@@ -97,13 +97,19 @@ body{
     --inset: 2.5px;
     border-radius: var(--r);
     transform-style: preserve-3d;
-    width: calc(min(86vw, 56dvh, 520px) * var(--slabMult));
+    width: calc(min(86vw, 56svh, 520px) * var(--slabMult));
     min-width: 0;
     transition: width 140ms ease;
     margin: 0 auto;
     aspect-ratio: 1;
     position: relative;
     perspective: 900px;
+}
+
+@supports (height: 100dvh){
+    .card3d{
+        width: calc(min(86vw, 56dvh, 520px) * var(--slabMult));
+    }
 }
 
 .frame{
@@ -118,7 +124,7 @@ body{
 .poster{
     --posterMult: 1;
     position: relative;
-    width: calc(min(92vw, 520px) * var(--posterMult));
+    width: calc(min(90vw, 520px) * var(--posterMult));
     min-width: 40vw;
     font-size: clamp(14px, 1.6vw, 18px);
     transition: width 140ms ease;
