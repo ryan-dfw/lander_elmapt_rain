@@ -502,8 +502,8 @@ a {
 .wordmark .glyph{
     display: inline-block;
     color: var(--text);
-    --h: 0;   /* 0 = red */
-    --s: 0;   /* 0..100 (we’ll treat 100 as “255”) */
+    --h: 0;
+    --s: 0;
     transition: color 60ms linear;
 }
 
