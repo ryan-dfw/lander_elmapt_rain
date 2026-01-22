@@ -111,7 +111,7 @@ export default function ProfileView() {
                 <Button
                     asChild
                     variant="glass"
-                    className="ctaBtn"
+                    className="ctaBtn less-important"
                     aria-label="Videography"
                 >
                     <a

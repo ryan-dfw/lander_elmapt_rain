@@ -1,23 +1,14 @@
-import React, {useEffect, useRef, useState} from "react";
-import type {Theme} from "../App.tsx";
+import {useEffect, useRef, useState, type PointerEvent} from "react";
 import Rain from "../img/rain.webp"
 
 export type Pfp = {
     name: string;
     image: string;
-    theme: Theme;
 };
 
 const pfp: Pfp = {
     name: "Rain",
     image: Rain,
-    theme: {
-        base: "#070c14",
-        c1: "#1e3a8a", c1a: 0.18,
-        c2: "#0f172a", c2a: 0.22,
-        c3: "#0c0132", c3a: 0.10,
-        text: "#dbe3ee",
-    },
 };
 
 export default function AcrylicSlab() {
@@ -30,8 +21,6 @@ export default function AcrylicSlab() {
 
     const [rotY, setRotY] = useState(0);
     const [dragging, setDragging] = useState(false);
-
-    const slabRef = useRef<HTMLDivElement | null>(null);
 
     const clamp = (v: number, lo: number, hi: number) =>
         Math.max(lo, Math.min(hi, v));
@@ -65,7 +54,7 @@ export default function AcrylicSlab() {
         dragRef.current.raf = 0;
     };
 
-    const onDown = (e: React.PointerEvent) => {
+    const onDown = (e: PointerEvent<HTMLDivElement>) => {
         if (!e.isPrimary) return;
 
         stopInertia();
@@ -83,7 +72,7 @@ export default function AcrylicSlab() {
         (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
     };
 
-    const onMove = (e: React.PointerEvent) => {
+    const onMove = (e: PointerEvent<HTMLDivElement>) => {
         if (!dragRef.current.active) return;
 
         const now = performance.now();
@@ -152,7 +141,6 @@ export default function AcrylicSlab() {
 
     return (
         <div
-            ref={slabRef}
             className="card3d"
             onPointerDown={onDown}
             onPointerMove={onMove}
