@@ -41,7 +41,7 @@
 .less-important{
     display: none;
 }
-/* HARD RESET FOR <a> USED AS BUTTON */
+
 a.btn,
 a.btn:link,
 a.btn:visited,
