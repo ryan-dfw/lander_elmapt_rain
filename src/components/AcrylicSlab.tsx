@@ -1,19 +1,37 @@
+import type { CSSProperties } from "react";
 import Rain from "../img/rain.webp"
 import {useInertialRotation} from "../hooks/useInertialRotation.ts";
+import "../styles/acrylic.tokens.css"
+import "../styles/acrylic.css"
 
 const image = Rain;
 const name = "Rain";
+
+type CSSVars = CSSProperties & {
+    "--slabMult"?: number;
+};
 
 export default function AcrylicSlab() {
 
     const { rotY, dragging, bind } = useInertialRotation();
 
-    return (
-        <div className="card3d" {...bind}>
+    const isSafari =
+        typeof navigator !== "undefined" &&
+        /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+    return (
+        <div
+            className="card3d"
+            {...bind}
+            style={
+                isSafari
+                    ? ({ "--slabMult": 0.8 } as CSSVars)
+                    : undefined
+            }
+        >
             <div
                 className={`card3dInner ${dragging ? "dragging" : ""}`}
-                style={{transform: `rotateY(${rotY}deg)`}}
+                style={{ transform: `rotateY(${rotY}deg)` }}
             >
 
                 <div className="cardFace cardFront">

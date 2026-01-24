@@ -1,3 +1,42 @@
+.ctaButtonContainer, .utilityButtonContainer{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ctaBtn {
+    align-self: center;
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+}
+
+.utilityBtn{
+    align-self: center;
+
+    padding: 16px 18px;
+    width: 56px;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    font-size: 20px;
+
+    display: grid;
+    place-items: center;
+
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+}
+
 .btn{
     display: inline-flex;
     justify-content: center;

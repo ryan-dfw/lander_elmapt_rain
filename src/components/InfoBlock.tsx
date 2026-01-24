@@ -1,3 +1,5 @@
+import "../styles/infoBlock.css"
+
 function ColorText({
                        text,
                        className = "",

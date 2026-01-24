@@ -6,13 +6,8 @@ export default function App() {
     useThemeScene(theme);
 
     return (
-        <>
-            <div className="bg" />
-            <div className="stage">
-                <div className="frame">
-                    <ProfileView/>
-                </div>
-            </div>
-        </>
+        <div className="stage">
+                <ProfileView />
+        </div>
     );
 }

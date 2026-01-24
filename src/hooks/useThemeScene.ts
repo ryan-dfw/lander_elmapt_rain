@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
+import "../styles/theme.css"
 
 export type Theme = {
     base: string;

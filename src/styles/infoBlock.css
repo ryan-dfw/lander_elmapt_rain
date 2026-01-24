@@ -1,0 +1,122 @@
+.wordmark{
+    margin-top: 15px;
+    margin-bottom: -18px;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    user-select: none;
+    transform: scale(1.2);
+    transform-origin: top center;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+}
+
+.wmTop{
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    opacity: 0.9;
+}
+
+.wmName{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.75em;
+    line-height: 1;
+}
+
+.wmDot{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    transform: translateY(-1px);
+}
+
+.wmRole{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.80;
+    display: inline-block;
+    transform: translateY(-1px) scaleY(1.15);
+}
+
+.wmStudio{
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.label-contact{
+    margin-top: 2.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35em;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 1em;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    opacity: 1;
+    text-align: center;
+    pointer-events: auto;
+}
+
+.contact-phone,
+.contact-email{
+    white-space: nowrap;
+}
+
+.contact-sep{
+    white-space: nowrap;
+}
+
+.contact {
+    text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+}
+
+.contact-prefix{
+    display: inline-block;
+    transform: translateY(-1px) scale(0.85);
+    transform-origin: right bottom;
+    opacity: 0.9;
+    color: var(--text);
+}
+
+.contact-sep{
+    display: inline-block;
+    opacity: 0.75;
+    transform: scale(1.15);
+    transform-origin: center;
+    padding: 0 0.35em;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(215, 240, 255);
+}
+
+.color { touch-action: none; }
+
+.wordmark .glyph{
+    display: inline-block;
+    color: var(--text);
+    --h: 0;
+    --s: 0;
+    transition: color 60ms linear;
+}
+
+.wordmark .glyph--on{
+    color: hsl(var(--h) calc(var(--s) * 1%) 70%);
+}
+
+.wordmark .glyph--fade { transition: opacity 180ms linear; opacity: 0; }
