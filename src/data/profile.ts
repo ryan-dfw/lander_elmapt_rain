@@ -10,15 +10,24 @@ export const profile = {
     company: "Elm Aperture",
 
     contact: {
-        phoneDisplay: "972.800.6775",
-        phoneHref: "tel:+19728006775",
+        phone: "9728006775",
         email: "rain@elmapt.com",
     },
 
     ctas: [
-        { href: "https://elmapt.com", label: "Portfolio" },
-        { href: "https://instagram.com/raindfwphotos", label: "Instagram" },
-        { href: "https://vimeo.com/raindfwphotos", label: "Videography", lessImportant: true },
+        {
+            href: "https://elmapt.com",
+            label: "Portfolio"
+        },
+        {
+            href: "https://instagram.com/raindfwphotos",
+            label: "Instagram"
+        },
+        {
+            href: "https://vimeo.com/raindfwphotos",
+            label: "Videography",
+            lessImportant: true
+        },
     ] satisfies readonly CtaLink[],
 
     colors: {
