@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-import "../styles/theme.css"
+import "../styles/theme.css";
 
 export type Theme = {
     base: string;
@@ -9,13 +9,19 @@ export type Theme = {
     text: string;
 };
 
-export const theme: Theme = {
-    base: "#070c14",
-    c1: "#1e3a8a", c1a: 0.18,
-    c2: "#0f172a", c2a: 0.22,
-    c3: "#0c0132", c3a: 0.10,
-    text: "#dbe3ee",
+export type ThemeColors = {
+    c1: string;
+    c2: string;
+    c3: string;
 };
+
+const buildTheme = (c: ThemeColors): Theme => ({
+    base: "#070c14",
+    c1: c.c1, c1a: 0.18,
+    c2: c.c2, c2a: 0.22,
+    c3: c.c3, c3a: 0.10,
+    text: "#dbe3ee",
+});
 
 const toRgb = (hex: string) => {
     const h = hex.replace("#", "");
@@ -44,12 +50,13 @@ type DriftBase = {
     p3x: number; p3y: number;
 };
 
-export function useThemeScene(t: Theme) {
+export function useThemeScene(colors: ThemeColors) {
+    const t = buildTheme(colors);
     const driftBaseRef = useRef<DriftBase | null>(null);
 
     useLayoutEffect(() => {
         setTheme(t);
-    }, [t]);
+    }, [t, t.base, t.c1, t.c1a, t.c2, t.c2a, t.c3, t.c3a, t.text]);
 
     useEffect(() => {
         const r = document.documentElement;

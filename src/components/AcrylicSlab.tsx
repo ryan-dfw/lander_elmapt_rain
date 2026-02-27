@@ -1,18 +1,15 @@
 import type { CSSProperties } from "react";
-import Rain from "../img/rain.webp"
-import {useInertialRotation} from "../hooks/useInertialRotation.ts";
-import "../styles/acrylic.tokens.css"
-import "../styles/acrylic.css"
-
-const image = Rain;
-const name = "Rain";
+import poster from "../data/profile.webp";
+import { useInertialRotation } from "../hooks/useInertialRotation.ts";
+import { profile } from "../data/profile";
+import "../styles/acrylic.tokens.css";
+import "../styles/acrylic.css";
 
 type CSSVars = CSSProperties & {
     "--slabMult"?: number;
 };
 
 export default function AcrylicSlab() {
-
     const { rotY, dragging, bind } = useInertialRotation();
 
     const isSafari =
@@ -23,22 +20,17 @@ export default function AcrylicSlab() {
         <div
             className="card3d"
             {...bind}
-            style={
-                isSafari
-                    ? ({ "--slabMult": 0.8 } as CSSVars)
-                    : undefined
-            }
+            style={isSafari ? ({ "--slabMult": 0.8 } as CSSVars) : undefined}
         >
             <div
                 className={`card3dInner ${dragging ? "dragging" : ""}`}
                 style={{ transform: `rotateY(${rotY}deg)` }}
             >
-
                 <div className="cardFace cardFront">
                     <img
                         className="posterImg"
-                        src={image}
-                        alt={name}
+                        src={poster}
+                        alt={profile.name}
                         draggable={false}
                         loading="eager"
                         fetchPriority="high"
@@ -52,14 +44,13 @@ export default function AcrylicSlab() {
 
                 <div className="cardFace cardBack">
                     <img
-                        src={image}
+                        src={poster}
                         alt=""
                         draggable={false}
                         className="posterImg posterImgBack"
                     />
                 </div>
-
             </div>
         </div>
-    )
+    );
 }

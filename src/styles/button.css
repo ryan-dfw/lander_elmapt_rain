@@ -77,10 +77,6 @@
     font-size: 22px;
 }
 
-.less-important{
-    display: none;
-}
-
 a.btn,
 a.btn:link,
 a.btn:visited,
@@ -91,4 +87,8 @@ a.btn:focus-visible {
     color: #e7e9ee !important;
     -webkit-text-fill-color: #e7e9ee !important;
     text-decoration: none !important;
+}
+
+.less-important{
+    display: none;
 }

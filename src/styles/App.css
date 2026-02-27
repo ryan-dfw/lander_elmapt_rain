@@ -33,6 +33,7 @@ body{
     position: fixed;
     inset: 0;
     overflow: hidden;
+    height: 100lvh;
 
     display: grid;
     justify-items: center;
@@ -43,5 +44,6 @@ body{
             calc(12px + env(safe-area-inset-right))
             calc(12px + env(safe-area-inset-bottom))
             calc(12px + env(safe-area-inset-left));
+
 
 }

@@ -1,42 +1,34 @@
-import {Button} from "./Button.tsx";
-
-type UtilityAction = {
-    key: string;
-    label: string;
-    text: string;
-    lessImportant?: boolean;
-    action: () => void;
-};
+import { Button } from "./Button.tsx";
+import { profile } from "../data/profile";
 
 const serveVcard = () => {
     const a = document.createElement("a");
-    a.href = "/Rain.vcf";
-    a.download = "Rain.vcf";
+    a.href = "/profile.vcf";
+    a.download = `${profile.name}.vcf`;
     a.target = "_self";
     a.rel = "noopener";
-
     document.body.appendChild(a);
     a.click();
     a.remove();
 };
 
-const actionsList: UtilityAction[] = [
+const actionsList = [
     {
         key: "download-vcard",
-        label: "Download",
+        label: `Download ${profile.name} contact`,
         text: "⤓",
         action: serveVcard,
     },
-];
+] as const;
 
 export default function UtilityButtonContainer() {
     return (
         <div className="utilityButtonContainer">
-            {actionsList.map(({ key, label, text, lessImportant, action }) => (
+            {actionsList.map(({ key, label, text, action }) => (
                 <Button
                     key={key}
                     variant="glass"
-                    className={`utilityBtn${lessImportant ? " less-important" : ""}`}
+                    className="utilityBtn"
                     aria-label={label}
                     onClick={action}
                 >
@@ -44,5 +36,5 @@ export default function UtilityButtonContainer() {
                 </Button>
             ))}
         </div>
-    )
+    );
 }

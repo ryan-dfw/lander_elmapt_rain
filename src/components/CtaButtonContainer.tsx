@@ -1,22 +1,10 @@
-import { Button } from "./Button.tsx"
-
-type CtaLink = {
-    href: string;
-    label: string;
-    text: string;
-    lessImportant?: boolean;
-};
-
-const linksList: CtaLink[] = [
-    { href: "https://elmapt.com", label: "Portfolio", text: "Portfolio" },
-    { href: "https://instagram.com/raindfwphotos", label: "Instagram", text: "Instagram" },
-    { href: "https://vimeo.com/raindfwphotos", label: "Videography", text: "Videography", lessImportant: true },
-];
+import { Button } from "./Button.tsx";
+import { profile } from "../data/profile";
 
 export default function CtaButtonContainer() {
     return (
         <div className="ctaButtonContainer">
-            {linksList.map(({ href, label, text, lessImportant }) => (
+            {profile.ctas.map(({ href, label, lessImportant }) => (
                 <Button
                     key={href}
                     asChild
@@ -25,7 +13,7 @@ export default function CtaButtonContainer() {
                     aria-label={label}
                 >
                     <a href={href} target="_blank" rel="noopener noreferrer">
-                        {text}
+                        {label}
                     </a>
                 </Button>
             ))}
